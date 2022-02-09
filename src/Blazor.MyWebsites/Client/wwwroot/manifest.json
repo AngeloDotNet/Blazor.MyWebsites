@@ -1,6 +1,6 @@
 {
-  "name": "Blazor.MyWebsites",
-  "short_name": "Blazor.MyWebsites",
+  "name": "Angelo Personal WebSites",
+  "short_name": "Angelo WebSites",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
