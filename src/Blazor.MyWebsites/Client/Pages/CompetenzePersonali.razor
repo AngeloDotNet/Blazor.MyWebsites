@@ -1,0 +1,44 @@
+﻿@page "/CompetenzePersonali"
+@using System.Text.RegularExpressions
+@using System.Web
+@using Blazor.MyWebsites.Shared.Models.ViewModels
+@inject HttpClient Http
+
+<h3>Competenze Personali</h3>
+
+@if (skills == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
+else
+{
+<MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm">
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<SkillPersonale, object>(x=>x.AreaTecnica)">Area Tecnica</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<SkillPersonale, object>(x=>x.Competenza)">Competenza</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Area Tecnica">@context.AreaTecnica</MudTd>
+        <MudTd DataLabel="Competenza">@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(@context.Competenza), "\r?\n|\r", "<br />"))</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="pageSizeOptions" />
+    </PagerContent>
+</MudTable>
+}
+
+@code {
+    List<SkillPersonale> skills;
+
+    private int[] pageSizeOptions = new int[] { 5, 10, 15 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSkills();
+    }
+
+    private async Task LoadSkills()
+    {
+        skills = await Http.GetFromJsonAsync<List<SkillPersonale>>("api/WebSites/LoadCompetenzePersonali");
+    }
+}
