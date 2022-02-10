@@ -1,4 +1,5 @@
 using Blazor.MyWebsites.Server.Models.Enums;
+using Blazor.MyWebsites.Server.Models.Services.Application;
 using Blazor.PersonalWebSites.Server.Models.Services.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,7 +73,7 @@ namespace Blazor.MyWebsites.Server
                 });
             });
 
-            //services.AddTransient<IWebSitesService, EfCoreWebSitesService>();
+            services.AddTransient<IWebSitesService, EfCoreWebSitesService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
