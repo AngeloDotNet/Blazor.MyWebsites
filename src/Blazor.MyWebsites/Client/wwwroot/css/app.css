@@ -42,9 +42,18 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+footer {
+    margin-top: 3em;
+    /*margin-top: 200px;*/
+    padding-top: 1em;
+    border-top: #cccccc 1px solid;
+    padding-bottom: 2em;
+    text-align: justify;
+}
