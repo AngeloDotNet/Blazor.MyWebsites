@@ -53,7 +53,7 @@ namespace Blazor.MyWebsites.Server
             {
                 config.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Blazor.PersonalWebSites",
+                    Title = "Blazor.MyWebSites",
                     Version = "v1",
                     // Description = "API example that returns the current time",
                     // TermsOfService = new Uri("https://example.com/terms"), 

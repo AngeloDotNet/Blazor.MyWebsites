@@ -4,6 +4,11 @@
 
 The project was created using powershell and the command to create it was: **dotnet new blazorwasm -f net5.0 -ho true -p true -o Blazor.MyWebSites**
 
+## Nuget Package Additional
+
+- MudBlazor
+- BlazorKit.Spinners
+
 ## Scaffolding Database
 
 To perform the scaffolding it is necessary to open the package management console and use the command: **Add-Migration Initial-Migration**
