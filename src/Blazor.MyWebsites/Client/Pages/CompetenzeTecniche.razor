@@ -6,40 +6,19 @@
 
 <h3>Competenze Tecniche</h3>
 
-@*@if (skills == null)
-{
-    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
-}
-else
-{
-<MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm">
-    <HeaderContent>
-        <MudTh><MudTableSortLabel SortBy="new Func<SkillTecnica, object>(x=>x.AreaTecnica)">Area Tecnica</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<SkillTecnica, object>(x=>x.Competenza)">Competenza</MudTableSortLabel></MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="Area Tecnica">@context.AreaTecnica</MudTd>
-        <MudTd DataLabel="Competenza">@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(@context.Competenza), "\r?\n|\r", "<br />"))</MudTd>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager PageSizeOptions="pageSizeOptions" />
-    </PagerContent>
-</MudTable>
-}*@
-
 <SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="SpinnerTemplate.Loader1">
     <ContentTemplate>
-        <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm">
+        <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
             <HeaderContent>
-                <MudTh><MudTableSortLabel SortBy="new Func<SkillTecnica, object>(x=>x.AreaTecnica)">Area Tecnica</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<SkillTecnica, object>(x=>x.Competenza)">Competenza</MudTableSortLabel></MudTh>
+                <MudTh>Area Tecnica</MudTh>
+                <MudTh>Competenza</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Area Tecnica">@context.AreaTecnica</MudTd>
                 <MudTd DataLabel="Competenza">@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(@context.Competenza), "\r?\n|\r", "<br />"))</MudTd>
             </RowTemplate>
             <PagerContent>
-                <MudTablePager PageSizeOptions="pageSizeOptions" />
+                <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" HidePageNumber="hidePageNumber" HidePagination="hidePagination" />
             </PagerContent>
         </MudTable>
     </ContentTemplate>
@@ -57,6 +36,12 @@ else
 
     private int[] pageSizeOptions = new int[] { 5, 10, 15 };
 
+    private int rowsPerPage = 10; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
+
+    private bool hideRowsPerPage;
+    private bool hidePageNumber;
+    private bool hidePagination;
+
     private bool hasError = false;
     private bool isLoading = true;
 
@@ -68,6 +53,19 @@ else
         try
         {
             await LoadSkills();
+
+            if (skills.Count <= 10)
+            {
+                hideRowsPerPage = true;
+                hidePageNumber = true;
+                hidePagination = true;
+            }
+            else
+            {
+                hideRowsPerPage = true;
+                hidePageNumber = false;
+                hidePagination = false;
+            }
         }
         catch (Exception)
         {
