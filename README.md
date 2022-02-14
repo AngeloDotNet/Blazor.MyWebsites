@@ -8,6 +8,7 @@ The project was created using powershell and the command to create it was:
 
 ## Nuget Package Additional
 
+- MailKit
 - MudBlazor
 - BlazorKit.Spinners
 
