@@ -6,6 +6,7 @@ The project was created using powershell and the command to create it was: **dot
 
 ## Nuget Package Additional
 
+- MailKit
 - MudBlazor
 - BlazorKit.Spinners
 
@@ -27,7 +28,7 @@ If these are not present, it is possible to integrate them with a simple copy an
 
 If these files are omitted for some reason, the application will not be visible / available while browsing from the browser and the fixed message **loading...** will remain.
 
-## Components
+## Development Notes
 
 ### MudBlazor
 

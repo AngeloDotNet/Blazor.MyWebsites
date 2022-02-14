@@ -1,24 +1,42 @@
-﻿@page "/CompetenzePersonali"
+﻿@page "/CorsiOnline"
 @using System.Text.RegularExpressions
 @using System.Web
 @using Blazor.MyWebsites.Shared.Models.ViewModels
 @inject HttpClient Http
 
-<h3>Competenze Personali</h3>
+<h3>Corsi Online</h3>
 
 <SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="SpinnerTemplate.Loader1">
     <ContentTemplate>
         <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
             <HeaderContent>
-                <MudTh>Area Tecnica</MudTh>
-                <MudTh>Competenza</MudTh>
+                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<OnlineCourse, object>(x=>x.Id)"></MudTableSortLabel></MudTh>
+                <MudTh>Corso</MudTh>
+                <MudTh>Piattaforma</MudTh>
+                <MudTh>Data Rilascio</MudTh>
+                <MudTh>Data Scadenza</MudTh>
+                <MudTh>Certificato</MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Area Tecnica">@context.AreaTecnica</MudTd>
-                <MudTd DataLabel="Competenza">@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(@context.Competenza), "\r?\n|\r", "<br />"))</MudTd>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Corso">@context.Corso</MudTd>
+                <MudTd DataLabel="Piattaforma">@context.Piattaforma</MudTd>
+                <MudTd DataLabel="DataRilascio">@context.DataRilascio</MudTd>
+                <MudTd DataLabel="DataScadenza">@context.DataScadenza</MudTd>
+                @{
+                    if (@context.Certificato.StartsWith("UC-"))
+                    {
+                        string link = string.Concat("https://www.udemy.com/certificate/", @context.Certificato);
+                        <MudTd DataLabel="Certificato"><a href="@link" target="_blank">Visualizza</a></MudTd>
+                    }
+                    else
+                    {
+                        <MudTd DataLabel="Certificato">Formato cartaceo</MudTd>
+                    }
+                }
             </RowTemplate>
             <PagerContent>
-                <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" HidePageNumber="hidePageNumber" HidePagination="hidePagination" />
+                <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" />
             </PagerContent>
         </MudTable>
     </ContentTemplate>
@@ -32,11 +50,11 @@
 </SpinnerLoader>
 
 @code {
-    List<SkillPersonale> skills;
+    List<OnlineCourse> skills;
 
     private int[] pageSizeOptions = new int[] { 5, 10, 15 };
 
-    private int rowsPerPage = 10; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
+    private int rowsPerPage = 15; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
 
     private bool hideRowsPerPage;
     private bool hidePageNumber;
@@ -79,6 +97,6 @@
 
     private async Task LoadSkills()
     {
-        skills = await Http.GetFromJsonAsync<List<SkillPersonale>>("api/WebSites/LoadCompetenzePersonali");
+        skills = await Http.GetFromJsonAsync<List<OnlineCourse>>("api/WebSites/LoadCorsiOnline");
     }
 }
