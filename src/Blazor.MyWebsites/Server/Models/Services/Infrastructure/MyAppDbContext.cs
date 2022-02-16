@@ -1,7 +1,7 @@
 ﻿using Blazor.MyWebsites.Shared.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blazor.PersonalWebSites.Server.Models.Services.Infrastructure
+namespace Blazor.MyWebsites.Server.Models.Services.Infrastructure
 {
     public partial class MyAppDbContext : DbContext
     {
