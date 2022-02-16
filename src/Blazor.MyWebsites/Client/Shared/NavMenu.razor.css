@@ -50,6 +50,12 @@
     color: white;
 }
 
+.testo-navbar {
+    color: white;
+    text-align: center;
+    margin-top: 50px;
+}
+
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;
