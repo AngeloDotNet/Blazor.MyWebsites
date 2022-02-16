@@ -1,0 +1,32 @@
+﻿<MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
+    <HeaderContent>
+        <MudTh>Area Tecnica</MudTh>
+        <MudTh>Competenza</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Area Tecnica">@context.AreaTecnica</MudTd>
+        <MudTd DataLabel="Competenza">@((MarkupString)Regex.Replace(HttpUtility.HtmlEncode(@context.Competenza), "\r?\n|\r", "<br />"))</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" HidePageNumber="hidePageNumber" HidePagination="hidePagination" />
+    </PagerContent>
+</MudTable>
+
+@code {
+    private int[] pageSizeOptions = new int[] { 5, 10, 15 };
+
+    [Parameter]
+    public List<Skill> skills { get; set; }
+
+    [Parameter]
+    public bool hideRowsPerPage { get; set; }
+
+    [Parameter]
+    public bool hidePageNumber { get; set; }
+
+    [Parameter]
+    public bool hidePagination { get; set; }
+
+    [Parameter]
+    public int rowsPerPage { get; set; } //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
+}
