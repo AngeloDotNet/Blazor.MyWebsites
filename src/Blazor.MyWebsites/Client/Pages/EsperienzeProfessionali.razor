@@ -1,0 +1,88 @@
+﻿@page "/EsperienzeProfessionali"
+@inject HttpClient Http
+
+<h3>Esperienze Professionali</h3>
+
+<SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="SpinnerTemplate.Loader1">
+    <ContentTemplate>
+        <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
+            <HeaderContent>
+                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<ProfessionalExperience, object>(x=>x.Id)"></MudTableSortLabel></MudTh>
+                <MudTh>Esperienza</MudTh>
+                <MudTh>Periodo</MudTh>
+                <MudTh>Azienda</MudTh>
+                <MudTh>Luogo</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Esperienza">@context.Esperienza</MudTd>
+                <MudTd DataLabel="Periodo">@context.Periodo</MudTd>
+                <MudTd DataLabel="Azienda">@context.Azienda</MudTd>
+                <MudTd DataLabel="Luogo">@context.Luogo</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" HidePageNumber="hidePageNumber" HidePagination="hidePagination" />
+            </PagerContent>
+        </MudTable>
+    </ContentTemplate>
+    <ErrorContentTemplate>
+        <tr>
+            <td colspan="4">
+                <div class="alert alert-danger">Loading failed</div>
+            </td>
+        </tr>
+    </ErrorContentTemplate>
+</SpinnerLoader>
+
+@code {
+    List<ProfessionalExperience> skills;
+
+    private int[] pageSizeOptions = new int[] { 5, 10, 15 };
+
+    private int rowsPerPage = 10; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
+
+    private bool hideRowsPerPage;
+    private bool hidePageNumber;
+    private bool hidePagination;
+
+    private bool hasError = false;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        //await Task.Delay(5000);
+        await Task.Delay(2000);
+
+        try
+        {
+            await LoadSkills();
+
+            if (skills.Count <= 10)
+            {
+                hideRowsPerPage = true;
+                hidePageNumber = true;
+                hidePagination = true;
+            }
+            else
+            {
+                hideRowsPerPage = true;
+                hidePageNumber = false;
+                hidePagination = false;
+            }
+        }
+        catch (Exception)
+        {
+            hasError = true;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task LoadSkills()
+    {
+        skills = await Http.GetFromJsonAsync<List<ProfessionalExperience>>("api/WebSites/LoadEsperienzeProfessionali");
+    }
+}
