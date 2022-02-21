@@ -1,36 +1,24 @@
-﻿@page "/CorsiOnline"
+﻿@page "/EsperienzeProfessionali"
 @inject HttpClient Http
 
-<h3>Corsi Online</h3>
+<h3>Esperienze Professionali</h3>
 
 <SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="SpinnerTemplate.Loader1">
     <ContentTemplate>
         <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
             <HeaderContent>
-                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<OnlineCourse, object>(x=>x.Id)"></MudTableSortLabel></MudTh>
-                <MudTh>Corso</MudTh>
-                <MudTh>Piattaforma</MudTh>
-                <MudTh>Data Rilascio</MudTh>
-                <MudTh>Data Scadenza</MudTh>
-                <MudTh>Certificato</MudTh>
+                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Descending" SortBy="new Func<ProfessionalExperience, object>(x=>x.Id)"></MudTableSortLabel></MudTh>
+                <MudTh>Esperienza</MudTh>
+                <MudTh>Periodo</MudTh>
+                <MudTh>Azienda</MudTh>
+                <MudTh>Luogo</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Id">@context.Id</MudTd>
-                <MudTd DataLabel="Corso">@context.Corso</MudTd>
-                <MudTd DataLabel="Piattaforma">@context.Piattaforma</MudTd>
-                <MudTd DataLabel="DataRilascio">@context.DataRilascio</MudTd>
-                <MudTd DataLabel="DataScadenza">@context.DataScadenza</MudTd>
-                @{
-                    if (@context.Certificato.StartsWith("UC-"))
-                    {
-                        string link = string.Concat("https://www.udemy.com/certificate/", @context.Certificato);
-                        <MudTd DataLabel="Certificato"><a href="@link" target="_blank">Visualizza</a></MudTd>
-                    }
-                    else
-                    {
-                        <MudTd DataLabel="Certificato">Formato cartaceo</MudTd>
-                    }
-                }
+                <MudTd DataLabel="Esperienza">@context.Esperienza</MudTd>
+                <MudTd DataLabel="Periodo">@context.Periodo</MudTd>
+                <MudTd DataLabel="Azienda">@context.Azienda</MudTd>
+                <MudTd DataLabel="Luogo">@context.Luogo</MudTd>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager PageSizeOptions="pageSizeOptions" HideRowsPerPage="hideRowsPerPage" HidePageNumber="hidePageNumber" HidePagination="hidePagination" />
@@ -47,11 +35,11 @@
 </SpinnerLoader>
 
 @code {
-    List<OnlineCourse> skills;
+    List<ProfessionalExperience> skills;
 
     private int[] pageSizeOptions = new int[] { 5, 10, 15 };
 
-    private int rowsPerPage = 15; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
+    private int rowsPerPage = 10; //Questo valore deve essere presente anche in pageSizeOptions così da poter permettere di tornare al valore dopo un eventuale cambiamento.
 
     private bool hideRowsPerPage;
     private bool hidePageNumber;
@@ -95,6 +83,6 @@
 
     private async Task LoadSkills()
     {
-        skills = await Http.GetFromJsonAsync<List<OnlineCourse>>("api/WebSites/LoadCorsiOnline");
+        skills = await Http.GetFromJsonAsync<List<ProfessionalExperience>>("api/WebSites/LoadEsperienzeProfessionali");
     }
 }
