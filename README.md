@@ -24,7 +24,7 @@ After launching the publish command **dotnet publish -c Release**
 
 Before publishing via docker, it is necessary to check the presence of the **_framework** folder and the javascript files **service-worker.js** and **service-worker-assets.js** in the **wwwroot** folder.
 
-If these are not present, it is possible to integrate them with a simple copy and paste from the Blazor project directory: **MyWebsites\Client\bin\Release\net5.0\wwwroot**
+If these are not present, it is possible to integrate them with a simple copy and paste from the Blazor project directory: **MyWebsites\Client\bin\Release\net5.0\publish\wwwroot**
 
 If these files are omitted for some reason, the application will not be visible / available while browsing from the browser and the fixed message **loading...** will remain.
 
