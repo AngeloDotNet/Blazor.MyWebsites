@@ -19,6 +19,9 @@
     <!-- Componente BlazorKit Spinner -->
     <link href="_content/BlazorKit.Spinners/spinners.css" rel="stylesheet" />
     <link href="_content/BlazorKit.Spinners/keyframes.css" rel="stylesheet" />
+
+    <!-- Componente Linkedin -->
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </head>
 
 <body>
@@ -36,6 +39,7 @@
 
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <!--<script>navigator.serviceWorker.register('service-worker.js');</script>-->
+    <script src="sw-registrator.js"></script>
 </body>
 </html>

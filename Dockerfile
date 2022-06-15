@@ -10,7 +10,7 @@ RUN apt install -y wget vim
 #RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb
 
 #RUN apt update
-#RUN apt install -y apt-transport-https dotnet-sdk-5.0 aspnetcore-runtime-5.0
+#RUN apt install -y apt-transport-https dotnet-sdk-6.0 aspnetcore-runtime-6.0
 
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
@@ -20,13 +20,13 @@ RUN apt-get update
 RUN apt-get install -y apt-transport-https
 
 RUN apt-get update
-RUN apt-get install -y dotnet-sdk-5.0
+RUN apt-get install -y dotnet-sdk-6.0
 
 #RUN apt-get update
 #RUN apt-get install -y apt-transport-https
 
 RUN apt-get update
-RUN apt-get install -y aspnetcore-runtime-5.0
+RUN apt-get install -y aspnetcore-runtime-6.0
 
 ENV ASPNETCORE_URLS=http://*:5001
 ENV ASPNETCORE_ENVIRONMENT="production"
