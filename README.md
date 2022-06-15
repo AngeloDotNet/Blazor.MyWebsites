@@ -35,6 +35,8 @@ If these files are omitted for some reason, the application will not be visible 
 Since the project is in .NET 5 version, it was necessary to install a lower MudBlazor Nuget package than the one indicated (as of 10/02/2022 the latest version is 6.0.6).
 Version 5.2.4 was installed for this demo project using the following command: **dotnet add package MudBlazor --version 5.2.4**
 
+**UPDATE 15/06/2022:** Updated Mudblazor to the latest version available on NuGet 6.0.10 
+
 ## License
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
