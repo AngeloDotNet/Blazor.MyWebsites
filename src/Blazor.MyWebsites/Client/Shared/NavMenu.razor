@@ -1,6 +1,6 @@
 ﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Angelo WebSites</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+    <a class="navbar-brand" href="/">Angelo WebSites</a>
+    <button class="navbar-toggler" aria-label="navigation" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
 </div>
@@ -8,7 +8,7 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+            <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </li>
@@ -32,11 +32,11 @@
                 <span class="oi oi-briefcase" aria-hidden="true"></span> Esperienze Professionali
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        @*<li class="nav-item px-3">
             <NavLink class="nav-link" href="Contatti">
                 <span class="oi oi-envelope-closed" aria-hidden="true"></span> Contatti
             </NavLink>
-        </li>
+        </li>*@
     </ul>
 </div>
 
