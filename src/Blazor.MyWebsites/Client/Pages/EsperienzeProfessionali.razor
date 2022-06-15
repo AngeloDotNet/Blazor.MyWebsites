@@ -3,7 +3,7 @@
 
 <h3>Esperienze Professionali</h3>
 
-<SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="SpinnerTemplate.Loader1">
+<SpinnerLoader IsLoading="isLoading" HasError="hasError" Size="46px" AccentColor="#3498db" Color="White" Center="true" Spinner="@Spinner">
     <ContentTemplate>
         <MudTable Items="@skills" Hover="true" Breakpoint="Breakpoint.Sm" RowsPerPage="@rowsPerPage">
             <HeaderContent>
@@ -47,6 +47,8 @@
 
     private bool hasError = false;
     private bool isLoading = true;
+
+    private SpinnerTemplate Spinner { get; set; } = SpinnerTemplate.Loader1;
 
     protected override async Task OnInitializedAsync()
     {
